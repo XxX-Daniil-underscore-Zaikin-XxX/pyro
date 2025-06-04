@@ -19,6 +19,9 @@ jobs:
   
   steps:
    - uses: actions/checkout@v4
+   - name: Get current date
+     id: date
+     run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
    - name: Set up Visual Studio environment
      if: success()
      # temporarily using compnerd's fork. change back to seanmiddleditch's repo once the changes are merged
@@ -43,5 +46,5 @@ jobs:
      if: success()
      uses: actions/upload-artifact@v4
      with:
-      name: pyro-master-${{ github.event.repository.pushed_at }}
+      name: pyro-master-${{ steps.date.outputs.date }}
       path: D:\a\pyro\pyro\pyro.dist
